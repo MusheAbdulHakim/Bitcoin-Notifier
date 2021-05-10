@@ -381,7 +381,7 @@ torrequest==0.1.0
 tqdm==4.48.1
 traitlets==4.3.3
 translationstring==1.4
-Twisted==18.9.0
+Twisted==20.3.0
 txaio==20.4.1
 typing-extensions==3.7.4.2
 tzlocal==2.1b1
