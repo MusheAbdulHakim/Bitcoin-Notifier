@@ -318,7 +318,7 @@ PyVirtualDisplay==0.2.1
 pywerview==0.2.0
 pyxattr==0.7.2
 pyxdg==0.26
-PyYAML==5.3.1
+PyYAML==5.4
 pyzmq==20.0.0
 QDarkStyle==2.8.1
 qrcode==6.1
