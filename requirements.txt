@@ -33,7 +33,7 @@ binwalk==2.2.0
 bitstring==3.1.5
 blinker==1.4
 boltons==19.1.0
-bottle==0.12.15
+bottle==0.12.19
 Brotli==1.0.9
 bs4==0.0.1
 cairocffi==0.9.0
