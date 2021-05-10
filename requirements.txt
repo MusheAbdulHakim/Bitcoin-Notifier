@@ -121,7 +121,7 @@ hpack==3.0.0
 html2text==2020.1.16
 html5lib==1.0.1
 httpie==2.2.0
-httplib2==0.18.1
+httplib2==0.19.0
 humanize==2.5.0
 hupper==1.10.2
 hyperframe==5.2.0
