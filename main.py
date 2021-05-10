@@ -1,33 +1,45 @@
 from notifypy import Notify 
-import time, sched
+import time, schedule
 from pycoingecko import CoinGeckoAPI
 
-coingecko = CoinGeckoAPI()
-notification = Notify()
-schedule= sched.scheduler(time.time, time.sleep)
 
-def notifyMe(title,message):
-    notification.title = title
-    notification.message = message
-    notification.send()
+class App():
+    def __init__(self):
+        self.coingecko = CoinGeckoAPI()
+        self.notification = Notify()
+        self.bitcoin = self.coingecko.get_price(ids='bitcoin', vs_currencies='usd')
+        self.title = "Bitcoin Current Price"
+        self.message = "The current price of bitcoin in usd is: $"+ str(self.Price(self.bitcoin))
+        self.notification.icon = "./icons/bitcoin.png"
+        self.notification.audio = "./sounds/notification.wav"
 
-def Price(coin):
-    coin_price = 0
-    for price in coin:
-        coin_price = coin[price]
-    return coin_price['usd']
+    def notifyMe(self):
+        self.notification.title = self.title
+        self.notification.message = self.message
+        self.notification.send()
 
-bitcoin = coingecko.get_price(ids='bitcoin', vs_currencies='usd')
+    def Price(self,coin):
+        coin_price = 0
+        for price in coin:
+            coin_price = coin[price]
+        return coin_price['usd']
 
-bitcoin_history = coingecko.get_price(ids='bitcoin', vs_currencies='usd', include_market_cap='true', include_24hr_vol='true', include_24hr_change='true', include_last_updated_at='true')
+#instantiate our app class
+app = App()
 
-title = "Bitcoin Price update"
-message = "The current price of bitcoin in usd is: $"+ str(Price(bitcoin))
-notification.icon = "./icons/bitcoin.png"
-notification.audio = "./sounds/notification.wav"
+#returns the notification which is callable as required by schedule
+def get_notification():
+    return app.notifyMe()
 
-notifyMe(title,message)
-schedule.enter(30, 1, notifyMe, (schedule))
-schedule.run()
+#call get_notification function to the schedule
+schedule.every(1).minutes.do(get_notification)
+
+#schedule for seconds below
+#schedule.every(1).seconds.do(get_notification)
+
+#loop for our schedules
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
 
