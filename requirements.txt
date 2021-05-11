@@ -1,0 +1,4 @@
+notify-py==0.3.2
+pycoingecko==2.0.0
+notify-py
+schedule==1.1.0
