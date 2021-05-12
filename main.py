@@ -1,5 +1,5 @@
 from notifypy import Notify 
-import time, schedule
+import time, schedule,optparse
 from pycoingecko import CoinGeckoAPI
 
 
@@ -26,20 +26,26 @@ class App():
 
 #instantiate our app class
 app = App()
-
-#returns the notification which is callable as required by schedule
-def get_notification():
-    return app.notifyMe()
-
-#call get_notification function to the schedule
-schedule.every(1).minutes.do(get_notification)
-
-#schedule for seconds below
-#schedule.every(1).seconds.do(get_notification)
-
-#loop for our schedules
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+parser = optparse.OptionParser()
 
 
+try:
+    #returns the notification which is callable as required by schedule
+    def get_notification():
+        return app.notifyMe()
+
+    parser.add_option("-t","--time",dest="time",help="Time in (minutes) you want to be receiving notifications.")
+    (options,arguments) = parser.parse_args()
+    notify_time = int(options.time)
+
+    #call get_notification function to the schedule
+    if notify_time:
+        schedule.every(notify_time).minutes.do(get_notification)
+    schedule.every(1).minutes.do(get_notification)
+    #loop for our schedules
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+except Exception as exception:
+    print(exception.with_traceback())
