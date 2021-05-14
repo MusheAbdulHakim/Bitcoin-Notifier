@@ -1,17 +1,17 @@
 from notifypy import Notify
-import time, schedule,optparse
+import time, schedule,optparse,locale
 from pycoingecko import CoinGeckoAPI
-
 
 class App():
     def __init__(self,crypto_coin):
         self.coingecko = CoinGeckoAPI()
         self.notification = Notify()
+        locale.setlocale(locale.LC_ALL, '')
         self.crypto_coin = crypto_coin  
         self.currency = 'usd'
         self.crypto = self.coingecko.get_price(ids=self.crypto_coin, vs_currencies=self.currency)
         self.title = "Bitcoin Current Price"
-        self.message = "The current price of "+ self.crypto_coin + " is $"+str(self.Price())
+        self.message = f"The current price of {self.crypto_coin} is {self.Price()}"
         self.notification.icon = icon
         self.notification.audio = sound
 
@@ -24,7 +24,7 @@ class App():
         coin_price = 0
         for price in self.crypto:
             coin_price = self.crypto[price]
-        return coin_price[self.currency]
+        return locale.currency(coin_price[self.currency], grouping=True) 
 
 
 icon = "./icons/bitcoin.png"
@@ -52,12 +52,12 @@ try:
     #call get_notification function to the schedule
     if notify_time:
         schedule.every(int(notify_time)).minutes.do(get_notification)
-    # schedule.every(1).minutes.do(get_notification)
-    schedule.every(10).seconds.do(get_notification)
+    schedule.every(1).minutes.do(get_notification)
+    # schedule.every(10).seconds.do(get_notification)
     #loop for our schedules
     while True:
         schedule.run_pending()
         time.sleep(1)
 
 except Exception as exception:
-    print(exception.with_traceback())
+    print(exception)
