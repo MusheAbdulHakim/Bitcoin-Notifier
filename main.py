@@ -36,8 +36,8 @@ class App():
 
 
 locale.setlocale(locale.LC_ALL, '')
-icon = "./icons/bitcoin.png"
-sound = "./sounds/notification.wav"
+icon = "./images/bitcoin.png"
+sound = "./sounds/gilfoyle_alert.wav"
 
 cli = Cli()
 
