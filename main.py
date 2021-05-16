@@ -1,17 +1,17 @@
 from notifypy import Notify
-import time, schedule,optparse,locale
+import time, schedule,locale
+from cli import Cli
 from pycoingecko import CoinGeckoAPI
 
 class App():
-    def __init__(self,crypto_coin):
-        self.coingecko = CoinGeckoAPI()
+    def __init__(self,api,crypto_coin):
+        self.coingecko = api
         self.notification = Notify()
-        locale.setlocale(locale.LC_ALL, '')
         self.crypto_coin = crypto_coin  
         self.currency = 'usd'
         self.crypto = self.coingecko.get_price(ids=self.crypto_coin, vs_currencies=self.currency)
-        self.title = "Bitcoin Current Price"
-        self.message = f"The current price of {self.crypto_coin} is {self.Price()}"
+        self.title = f"{self.crypto_coin.title()} Current Price"
+        self.message = f"The Current Price of {self.crypto_coin.title()} is {self.Price()}"
         self.notification.icon = icon
         self.notification.audio = sound
 
@@ -26,38 +26,46 @@ class App():
             coin_price = self.crypto[price]
         return locale.currency(coin_price[self.currency], grouping=True) 
 
+    def getCoinList(self):
+        self.coingecko.get_coins_list()
 
+locale.setlocale(locale.LC_ALL, '')
 icon = "./icons/bitcoin.png"
 sound = "./sounds/notification.wav"
-parser = optparse.OptionParser()
 
-parser.add_option("-t","--time",dest="time",help="Time in (minutes) you want to be receiving notifications.")
-parser.add_option('-c',"--coin",dest="crypto",help="Crypto currency price you want.")
-(options,arguments) = parser.parse_args()
-notify_time = options.time
+cli = Cli()
 
-CRYPTO_CURRENCY = 'bitcoin'
+time_type = cli.time_type
+notify_time = cli.time
+crypto_currency = cli.crypto
 
-if options.crypto:
-    CRYPTO_CURRENCY = options.crypto
+if cli.time == None:
+    notify_time = 1
 
-app = App(CRYPTO_CURRENCY.lower())
+if cli.time_type == None:
+    time_type = 'minutes'
+
+if cli.crypto == None:
+    crypto_currency = 'bitcoin'
+
+api = CoinGeckoAPI()
+app = App(api,crypto_currency)
 
 
 def get_notification():
     return app.notifyMe()
 
+
 try:
-    
-    #call get_notification function to the schedule
-    if notify_time:
-        schedule.every(int(notify_time)).minutes.do(get_notification)
-    schedule.every(1).minutes.do(get_notification)
-    # schedule.every(10).seconds.do(get_notification)
-    #loop for our schedules
+    if time_type =='seconds':
+        schedule.every(int(notify_time)).seconds.do(get_notification)
+
+    schedule.every(int(notify_time)).minutes.do(get_notification)
+
+        #loop for our schedules
     while True:
         schedule.run_pending()
         time.sleep(1)
 
-except Exception as exception:
-    print(exception)
+except Exception as e:
+    print(e)
