@@ -1,5 +1,5 @@
 from notifypy import Notify
-import time, schedule,locale
+import time, schedule,locale,pprint
 from cli import Cli
 from pycoingecko import CoinGeckoAPI
 
@@ -27,7 +27,13 @@ class App():
         return locale.currency(coin_price[self.currency], grouping=True) 
 
     def getCoinList(self):
-        self.coingecko.get_coins_list()
+        coins_list = self.coingecko.get_coins_list()
+        return coins_list
+    
+    def getCurrencies(self):
+        currencies = self.coingecko.get_supported_vs_currencies()
+        return currencies
+
 
 locale.setlocale(locale.LC_ALL, '')
 icon = "./icons/bitcoin.png"
@@ -50,7 +56,12 @@ if cli.crypto == None:
 
 api = CoinGeckoAPI()
 app = App(api,crypto_currency)
+pp = pprint.PrettyPrinter(indent=4,compact=True)
+if cli.getCoins:
+    pp.pprint(app.getCoinList())
 
+if cli.getCurrencies:
+    pp.pprint(app.getCurrencies())
 
 def get_notification():
     return app.notifyMe()
