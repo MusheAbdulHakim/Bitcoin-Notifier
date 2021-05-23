@@ -16,10 +16,14 @@ A simple python script to give you notification on the current bitcoin price in 
 # Usage
 1. `python3 main.py`.This will run the script and give you notification after every one minute.
 
+2. `python3 main.py --help`.all the commands you can use to run the script.
+
 2 . `python3 main.py 2 `.This will run the script and give you notifications after every two minute.You can pass any number of minutes you want it to notify you on the bitcoin price in the process of running the script in the terminal.
 
  # Note
- Is still under development.I am still working on making it more dynamic
+ This project is still under development.
+
+
 
  # API
  https://www.coingecko.com/en/api
