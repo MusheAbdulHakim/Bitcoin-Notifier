@@ -24,7 +24,7 @@ A simple python script to give you notification on the current bitcoin price in 
  This project is still under development.
 
 # Inspiration
-![ScreenShot](images/gilfoyle.png?raw=true "Gilfoyle")
+![Gilfoyle](images/gilfoyle.png?raw=true "Gilfoyle")
 
  # API
  https://www.coingecko.com/en/api
