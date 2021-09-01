@@ -1,27 +1,38 @@
 # DeskTop-Notifier-with-python-
 
-A simple python script to give you notification on the current bitcoin price in us dollars after every one minute(Ofcourse you can change it by passing the time you want in the terminal).
+A simple python script to give you notification on the current bitcoin price in us dollars.
+This script if very dynamic and customizable. you can change the currency and the crypto coin you want to get notify on.
 
 
 
 # Install requirements
-1.  `pip3 install notify-py`
-2. `pip3 install schedule`
-3. `pip3 install pycoingecko`
+1. Use the following commands to install required packages.
+    ```
+    pip3 install notify-py
+    pip3 install schedule
+    pip3 install pycoingecko
+    ```
 
-4. Or use  `pip3 install -r requirements.txt`
+Or use 
+```
+pip3 install -r requirements.txt
+```
 
-5. After installing the requirements, run main.py in the terminal and wait for 1 minute.You should get notification.
+2. After installing the requirements, run 
+```
+python3 Main.py
+```
+in the terminal and wait for 1 minute.You should get notification alert of current bitcoin price.If you had any error, you can post it in the issues tab of the repository.
 
 # Usage
-1. `python3 main.py`.This will run the script and give you notification after every one minute.
+1. `python3 main.py`.This will run the script and give you notification of bitcoin price after one minute.
 
-2. `python3 main.py --help`.all the commands you can use to run the script.
+2. use `python3 Main.py --help` to see all the commands you can use on the script.
 
-2 . `python3 main.py 2 `.This will run the script and give you notifications after every two minute.You can pass any number of minutes you want it to notify you on the bitcoin price in the process of running the script in the terminal.
+2 . `python3 Main.py -t 2 `.This will run the script and give you notifications of bitcoin price after two minute.You can also pass in the currency you want to use or even if you want to get notification in seconds instead of minutes.You can also set the script to repeatedly give you the notification base on the time you set using the --loop cath in the terminal.
 
  # Note
- This project is still under development.
+ This project is still under development. Your features and pull requests are welcome.
 
 # Inspiration
 ![Gilfoyle](images/gilfoyle.jpg?raw=true "Gilfoyle")
