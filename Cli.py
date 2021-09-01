@@ -31,7 +31,7 @@ class Cli:
         parser.add_argument(
             "-L",
             "--listcoins",
-            dest="CoinsList",default=False,type=bool,
+            dest="listcoins",default=False,type=bool,
             help="Get all supported coins. Takes a boolearn (True or False)"
         )
 
@@ -44,8 +44,14 @@ class Cli:
         parser.add_argument(
             '-l',
             "--listcurrency",
-            dest="Currencies",default=False,type=bool,
+            dest="listcurrencies",default=False,type=bool,
             help="Get list of supported curriencies.Takes a boolearn (True or False)"
+        )
+
+        parser.add_argument(
+            '--loop',dest="loop",default=False,
+            type=bool,
+            help="Repeat notification for the time set. Default [false]"
         )
 
         return parser.parse_args()
