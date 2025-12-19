@@ -48,12 +48,11 @@ class Cli:
         )
 
         parser.add_argument(
-            '--loop',
-            dest="loop",
-            default=False,
-            type=bool,
-            help="Repeat notification for the time set. Default [false]"
+            '-r',
+            '--repeat',
+            default= True,
+            action='store_true',
+            help="Repeat notification for the time set. Default [True]"
         )
 
         return parser.parse_args()
-

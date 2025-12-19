@@ -82,16 +82,15 @@ locale.setlocale(locale.LC_ALL, '')
 if __name__ == '__main__':
 
     cli = Cli().parse_options()
-    print(hasattr(cli, 'loop'))
-    # app = Main(cli.coin)
-    # pp = pprint.PrettyPrinter(indent=4,compact=True)
+    app = Main(cli.coin)
+    pp = pprint.PrettyPrinter(indent=4,compact=True)
 
-    # if cli.listcoins:
-    #     pp.pprint(app.list_coins())
-    #     exit()
-    # if cli.listcurrencies:
-    #     pp.pprint(app.list_currencies())
-    #     exit()
+    if cli.listcoins:
+        pp.pprint(app.list_coins())
+        exit()
+    if cli.listcurrencies:
+        pp.pprint(app.list_currencies())
+        exit()
     
-    # app.startRunning(cli.time, cli.loop)
+    app.startRunning(cli.time, cli.repeat)
 
