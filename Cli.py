@@ -28,7 +28,7 @@ class Cli:
             dest="listcoins",
             default=False,
             type=bool,
-            help="Get all supported coins. Takes a boolearn (True or False)"
+            help="Get all supported coins. Takes a boolean (True or False)"
         )
 
         parser.add_argument(
@@ -42,8 +42,7 @@ class Cli:
         parser.add_argument(
             '-l',
             "--listcurrency",
-            dest="listcurrencies",
-            default=False,type=bool,
+            action='store_true',
             help="Get list of supported curriencies.Takes a boolean (True or False)"
         )
 

@@ -88,7 +88,7 @@ if __name__ == '__main__':
     if cli.listcoins:
         pp.pprint(app.list_coins())
         exit()
-    if cli.listcurrencies:
+    if cli.listcurrency:
         pp.pprint(app.list_currencies())
         exit()
     
