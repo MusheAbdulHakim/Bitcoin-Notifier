@@ -23,15 +23,6 @@ class Cli:
         )
 
         parser.add_argument(
-            "-L",
-            "--listcoins",
-            dest="listcoins",
-            default=False,
-            type=bool,
-            help="Get all supported coins. Takes a boolean (True or False)"
-        )
-
-        parser.add_argument(
             '-C','--currency',
             dest='currency',
             default='usd',
@@ -40,18 +31,48 @@ class Cli:
         )
 
         parser.add_argument(
+            '-p',
+            '--price',
+            type=float,
+            help="Set a price point."
+        )
+
+        parser.add_argument(
+            '-b',
+            '--below',
+            dest='below',
+            action='store_true',
+            help="Only receive the notification if the current price goes below the price set with --price."
+        )
+        parser.add_argument(
+            '-a',
+            '--above',
+            dest='above',
+            action='store_true',
+            help="Only receive the notification if the current price goes above the price set with --price."
+        )
+
+        parser.add_argument(
+            "-L",
+            "--listcoins",
+            dest="listcoins",
+            action='store_true',
+            help="Get all supported coins."
+        )
+
+        parser.add_argument(
             '-l',
             "--listcurrency",
             action='store_true',
-            help="Get list of supported curriencies.Takes a boolean (True or False)"
+            help="Get list of supported curriencies."
         )
 
         parser.add_argument(
             '-r',
             '--repeat',
-            default= True,
+            default= False,
             action='store_true',
-            help="Repeat notification for the time set. Default [True]"
+            help="Repeat notification for the time set. Default [False]"
         )
 
         return parser.parse_args()
